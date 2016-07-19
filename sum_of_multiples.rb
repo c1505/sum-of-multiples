@@ -1,22 +1,15 @@
 class SumOfMultiples
     attr_accessor :result_array
-    
-    def initialize(factor1, factor2, factor3 = nil)
-        @factor1 = factor1
-        @factor2 = factor2
-        @factor3 = factor3
+
+    def initialize(*factors)
+    		@factors = factors
         @result_array = []
     end
-  
-    def self.to(limit)
-        inst = self.new(3, 5)
-        inst.to(limit)
-    end
-  
+
     def to(limit)
-        multiples(@factor1, limit)
-        multiples(@factor2, limit)
-        multiples(@factor3, limit) if @factor3
+    		@factors.each do |arg|
+    			multiples(arg, limit)
+    		end
         result = result_array.uniq.reduce(:+)
         result ? result : 0
     end
